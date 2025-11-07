@@ -1,23 +1,17 @@
+import CsButton from "../ui/CsButton"
 
 const Category = () => {
-    const categories = [
-        { id: 1, name: 'Electronics' },
-        { id: 2, name: 'Clothing' },
-        { id: 3, name: 'Books' },
-        { id: 4, name: 'Home & Kitchen' },
-        { id: 5, name: 'Sports' },
-    ]
+
     return (
-        <div className="flex items-center justify-center gap-4 px-5 md:px-10 py-3 overflow-x-scroll">
-            {
-                categories.map((category) => (
-                    <div key={category.id}
-                        className="border border-slate-500 min-w-[130px] text-lg hover:bg-[#CECFD2] transition-all duration-300 cursor-pointer my-5 md:my-10 flex items-center justify-center flex-1 py-2 rounded-md"
-                    >
-                        {category.name}
-                    </div>
-                ))
-            }
+        <div className="mb-12">
+            <h2 className="mb-6 text-2xl font-bold text-slate-900">Kateqoriyalar üzrə seçim</h2>
+            <div className="flex flex-wrap gap-3">
+                {["Bütün", "Erişimlər", "Giyim", "Ev", "Kadın"].map((cat) => (
+                    <CsButton key={cat} variant={cat === "Bütün" ? "primary" : "secondary"} size="medium" className="rounded-full!">
+                        {cat}
+                    </CsButton>
+                ))}
+            </div>
         </div>
     )
 }

@@ -6,9 +6,9 @@ import Products from "./components/home/Products";
 export default function Home() {
   return (
     <div className="">
-      {/* <Category /> */}
       {/* <Banner /> */}
       <Hero />
+      <Category />
       {/* <Products /> */}
     </div>
   );
