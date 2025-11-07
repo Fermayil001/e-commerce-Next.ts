@@ -1,3 +1,5 @@
+import CsButton from "../ui/CsButton"
+import Favorites from "./Favorites"
 import HamburgerMenu from "./HamburgerMenu"
 import Logo from "./Logo"
 import OrderCount from "./OrderCount"
@@ -6,12 +8,15 @@ import User from "./User"
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between h-16 px-3 md:px-10 gap-4 bg-gray-800 text-white">
+    <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 text-white">
         <Logo />
         <Search />
+        {/* <Favorites /> */}
+        <CsButton text="Sign in" variant="secondary" size="small"/>
+        <CsButton text="Join" variant="primary" size="small"/>
         <OrderCount />
-        <User />
-        <HamburgerMenu />
+        {/* <User /> */}
+        {/* <HamburgerMenu /> */}
     </div>
   )
 }

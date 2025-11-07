@@ -2,7 +2,7 @@
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
-import { SlBasket } from "react-icons/sl";
+import { GrFavorite } from "react-icons/gr";
 import { NoSsr } from '@mui/material';
 
 
@@ -15,12 +15,12 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   },
 }));
 
-const OrderCount = () => {
+const Favorites = () => {
   return (
     <NoSsr>
-      <IconButton aria-label="cart" className='p-0! pr-2!'>
-        <StyledBadge badgeContent={4} color="success">
-          <SlBasket />
+      <IconButton aria-label="cart">
+        <StyledBadge badgeContent={2} color="secondary">
+          <GrFavorite />
         </StyledBadge>
       </IconButton>
     </NoSsr>
@@ -28,4 +28,4 @@ const OrderCount = () => {
   )
 }
 
-export default OrderCount
+export default Favorites

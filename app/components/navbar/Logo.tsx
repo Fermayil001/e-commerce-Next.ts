@@ -1,5 +1,6 @@
 'use client'
-
+import Image from "next/image"
+import logo from "../../../public/Logo.jpg"
 import { useRouter } from "next/navigation"
 
 const Logo = () => {
@@ -7,9 +8,10 @@ const Logo = () => {
     return (
         <div
             onClick={() => router.push('/')}
-            className="text-2xl px-5 py-2 cursor-pointer bg-gray-950 rounded-md"
+            className="text-2xl min-w-[150px] h-[45px]  relative cursor-pointer"
         >
-            Ad.<span className="text-sm">com</span>
+            <Image src={logo} alt="" fill sizes="full" className="object-cover rounded-md filter brightness-110"/>
+            {/* Lotosia<span className="text-sm text-white">.com</span> */}
         </div>
     )
 }
