@@ -8,7 +8,7 @@ import User from "./User"
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 text-white">
+    <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 text-cswhite border-b border-csborder">
         <Logo />
         <Search />
         {/* <Favorites /> */}
