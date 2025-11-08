@@ -1,8 +1,10 @@
 import { Rating } from "@mui/material";
 import { GrFavorite } from "react-icons/gr";
 import CsButton from "./CsButton";
+import { useRouter } from "next/navigation";
 
 type Props = {
+    id: string;
     name: string;
     price: number;
     image: string;
@@ -10,7 +12,9 @@ type Props = {
     reviews: number;
 }
 
-const Cart = ({ name, price, image, rating, reviews }: Props) => {
+const Cart = ({ name, price, image, rating, reviews, id }: Props) => {
+    const router = useRouter()
+
     return (
         <div className="border border-csborder py-3 w-full sm:w-[90%] flex flex-col gap-6 shadow-sm hover:shadow-lg cstransition">
             <div className="relative w-full h-[200px]  overflow-hidden">
@@ -32,17 +36,18 @@ const Cart = ({ name, price, image, rating, reviews }: Props) => {
                 <div className="flex gap-2">
                     <CsButton
                         size="medium"
-                        text="View"
+                        text="Ətraflı"
                         variant="secondary"
                         className="w-full"
-                        // onClick={() => alert('Added to Cart')}
+                        onClick={() => router.push(`/product/${id}`)}
+                    // onClick={() => alert('Added to Cart')}
                     />
                     <CsButton
                         size="medium"
-                        text="Add to Cart"
+                        text="Səbətə"
                         variant="primary"
                         className="w-full"
-                        // onClick={() => alert('Buy Now')}
+                    // onClick={() => alert('Buy Now')}
                     />
                 </div>
             </div>
