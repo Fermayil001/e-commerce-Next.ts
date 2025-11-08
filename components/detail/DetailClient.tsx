@@ -47,6 +47,7 @@ const DetailClient = ({ product }: { product: ProductType }) => {
             <div className="space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold text-slate-900">{product.name}</h1>
+                    <p className="mt-2 text-slate-600">{product.description}</p>
                 </div>
 
                 {/* Rating */}

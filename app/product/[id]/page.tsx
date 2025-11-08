@@ -17,9 +17,7 @@ const ProdoctDetail = async ({ params }: PageProps) => {
 
   return (
     <div>
-      <main className="container mx-auto py-12">
-        <DetailClient product={product}/>
-      </main>
+      <DetailClient product={product} />
     </div>
   )
 }
