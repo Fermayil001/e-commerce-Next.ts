@@ -1,14 +1,14 @@
-import Banner from "./components/home/Banner";
-import Category from "./components/home/Category";
-import Hero from "./components/home/Hero";
-import Products from "./components/home/Products";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Hero from "@/components/home/Hero";
+import Products from "@/components/home/Products";
 
 export default function Home() {
   return (
     <div className="">
       {/* <Banner /> */}
       <Hero />
-      <Category />
+      <Products />
       {/* <Products /> */}
     </div>
   );

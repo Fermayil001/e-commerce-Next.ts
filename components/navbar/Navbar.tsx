@@ -1,11 +1,8 @@
 import CsButton from "../ui/CsButton"
-import Favorites from "./Favorites"
 import HamburgerMenu from "./HamburgerMenu"
 import Logo from "./Logo"
 import NavLinks from "./NavLinks"
 import OrderCount from "./OrderCount"
-import Search from "./Search"
-import User from "./User"
 
 const Navbar = () => {
   return (
