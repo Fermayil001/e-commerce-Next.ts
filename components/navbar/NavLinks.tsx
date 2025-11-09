@@ -7,7 +7,7 @@ export const Navication = [
         text: "Əsas səhifə",
     },
     {
-        href: "/products",
+        href: "/shop",
         text: "Məhsullar",
     },
     {
