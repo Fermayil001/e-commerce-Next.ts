@@ -1,10 +1,13 @@
 import { CiSearch } from "react-icons/ci";
 
 interface CsInputProps {
-    placeholder: string
+  id?: string
+  type?: string
+  placeholder: string
+  name?: string
 }
 
-const CsInput = ({ placeholder }: CsInputProps) => {
+const CsInput = ({ id, placeholder, type = 'text', name }: CsInputProps) => {
   return (
     <input
       className="
@@ -24,8 +27,10 @@ const CsInput = ({ placeholder }: CsInputProps) => {
         focus-visible:ring-ring/50
         focus-visible:ring-2
         "
-      type="text"
+      type={type}
       placeholder={placeholder}
+      id={id}
+      name={name}
     />
 
 

@@ -57,13 +57,13 @@ export default function FAQPage() {
 
       {/* FAQs */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container mx-auto px-0 md:px-4 max-w-3xl">
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div key={index} className="border border-slate-200 rounded-lg overflow-hidden">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left"
+                  className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-slate-50 cstransition text-left"
                 >
                   <h3 className="font-semibold text-slate-900 pr-4">{faq.question}</h3>
                   <FaChevronDown

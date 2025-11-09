@@ -29,14 +29,14 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="bg-linear-to-b from-[#2d5a3d] to-[#1f3d2a] text-white py-16 rounded-md">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Bizimlə Əlaqə Saxlayın</h1>
-          <p className="text-lg opacity-90">Hər hansı sualınız üçün bizi əlaqə saxlamaqdan ehtiyac etməyin</p>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">Bizimlə Əlaqə Saxlayın</h1>
+          <p className="text-base md:text-lg opacity-90">Hər hansı sualınız üçün bizi əlaqə saxlamaqdan ehtiyac etməyin</p>
         </div>
       </section>
 
       {/* Contact Info */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-0 md:px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
             {[
               {
@@ -71,7 +71,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="max-w-2xl mx-auto bg-slate-50 rounded-lg p-8">
+          <div className="max-w-2xl mx-auto bg-slate-50 rounded-lg shadow-md p-4 md:p-8">
             <h2 className="text-2xl font-bold mb-6 text-[#2d5a3d]">Bizə Mesaj Göndərin</h2>
 
             {submitted && (
