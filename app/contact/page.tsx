@@ -27,7 +27,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-linear-to-b from-[#2d5a3d] to-[#1f3d2a] text-white py-16 rounded-md">
+      <section className="bg-slate-50 text-csblack py-16 rounded-md">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">Bizimlə Əlaqə Saxlayın</h1>
           <p className="text-base md:text-lg opacity-90">Hər hansı sualınız üçün bizi əlaqə saxlamaqdan ehtiyac etməyin</p>
@@ -35,7 +35,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-cswhite">
         <div className="container mx-auto px-0 md:px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
             {[
@@ -59,7 +59,7 @@ export default function ContactPage() {
               return (
                 <div key={idx} className="text-center">
                   <div className="flex justify-center mb-4">
-                    <div className="p-4 bg-[#2d5a3d] text-white rounded-full">
+                    <div className="p-4 bg-accent-foreground/90 text-white rounded-full">
                       <Icon className="h-6 w-6" />
                     </div>
                   </div>
@@ -72,7 +72,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="max-w-2xl mx-auto bg-slate-50 rounded-lg shadow-md p-4 md:p-8">
-            <h2 className="text-2xl font-bold mb-6 text-[#2d5a3d]">Bizə Mesaj Göndərin</h2>
+            <h2 className="text-2xl font-bold mb-6 text-csblack">Bizə Mesaj Göndərin</h2>
 
             {submitted && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
@@ -115,7 +115,11 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#2d5a3d] resize-none"
               ></textarea>
-              <CsButton type="submit" variant="primary" className="w-full bg-[#2d5a3d]! hover:bg-[#1f3d2a]! text-white">
+              <CsButton
+                type="submit"
+                variant="primary"
+                className="w-full"
+              >
                 <BiSend className="h-4 w-4 mr-2" />
                 Mesaj Göndər
               </CsButton>

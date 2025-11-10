@@ -16,7 +16,7 @@ const Cart = ({ name, price, image, rating, reviews, id }: Props) => {
     const router = useRouter()
 
     return (
-        <div className="border border-csborder py-3 w-full sm:w-[90%] flex flex-col gap-6 shadow-sm hover:shadow-lg cstransition">
+        <div className="border box-border border-csborder py-3 min-h-f mx-auto  flex flex-col gap-6 shadow-sm hover:shadow-lg cstransition">
             <div className="relative w-full h-[200px]  overflow-hidden">
                 <img src={image} className="object- hover:scale-105 cstransition w-full h-full" alt="" />
                 <button
