@@ -13,15 +13,11 @@ const Navbar = () => {
       <NavLinks />
       {/* <Favorites /> */}
       <div className="flex gap-2 md:4 items-center">
-        <CsButton variant="secondary" size="small" className="hidden sm:flex" >
-          <Link href="/login">
-            Daxil ol
-          </Link>
+        <CsButton href="/login" variant="secondary" size="small" className="hidden sm:flex" >
+          Daxil ol
         </CsButton>
-        <CsButton variant="primary" size="small" className="hidden sm:flex" >
-          <Link href="/register">
-            Qeydiyyatdan keç
-          </Link>
+        <CsButton href="/register" variant="primary" size="small" className="hidden sm:flex" >
+          Qeydiyyatdan keç
         </CsButton>
         {/* <User /> */}
         <OrderCount />
