@@ -36,7 +36,7 @@ const Products = () => {
         setSelectedCat(category.name)
     }
     return (
-        <div>
+        <section>
             <Category onCategoryClick={handleCategoryClick} categories={categories} selectedCat={selectedCat} />
 
             {
@@ -46,7 +46,7 @@ const Products = () => {
                     ))
                     : <ProductsSlider selectedCat={selectedCat} />
             }
-        </div>
+        </section>
     )
 }
 

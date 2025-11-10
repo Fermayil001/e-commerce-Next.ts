@@ -15,7 +15,7 @@ interface CategoryProps {
 const Category = ({ onCategoryClick, categories, selectedCat }: CategoryProps) => {
 
     return (
-        <div className="mb-3">
+        <section className="mb-3">
             <h2 className="mb-6 text-2xl font-bold text-slate-900">Kateqoriyalar üzrə seçim</h2>
             <div className="flex flex-wrap gap-3">
                 {categories.map((cat) => (
@@ -30,7 +30,7 @@ const Category = ({ onCategoryClick, categories, selectedCat }: CategoryProps) =
                     </CsButton>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 

@@ -7,37 +7,70 @@ import { SAMPLE_PRODUCTS } from "@/data/data";
 
 
 const ProductsSlider = ({ selectedCat }: { selectedCat: string }) => {
-    const [slidesToShow, setSlidesToShow] = useState<number | null>(null);
-    const [showArrows, setShowArrows] = useState<boolean>(true);
+    /*     const [slidesToShow, setSlidesToShow] = useState<number | null>(null);
+        const [showArrows, setShowArrows] = useState<boolean>(true); */
 
     // ✅ Ekran ölçüsünü təyin edirik
-    useEffect(() => {
-        const updateSlides = () => {
-            const width = window.innerWidth;
-            if (width < 480) {
-                setSlidesToShow(1)
-                setShowArrows(false)
-            }
-            else if (width < 800) setSlidesToShow(2);
-            else if (width < 1024) setSlidesToShow(3);
-            else setSlidesToShow(4);
-        };
-
-        updateSlides();
-        window.addEventListener("resize", updateSlides);
-        return () => window.removeEventListener("resize", updateSlides);
-    }, []);
-
-    if (slidesToShow === null) return null; // SSR zamanı render etməsin
+    /*  useEffect(() => {
+         const updateSlides = () => {
+             const width = window.innerWidth;
+             if (width < 480) {
+                 setSlidesToShow(1)
+                 setShowArrows(false)
+             }
+             else if (width < 800) setSlidesToShow(2);
+             else if (width < 1024) setSlidesToShow(3);
+             else setSlidesToShow(4);
+         };
+ 
+         updateSlides();
+         window.addEventListener("resize", updateSlides);
+         return () => window.removeEventListener("resize", updateSlides);
+     }, []);
+ 
+     if (slidesToShow === null) return null; */ // SSR zamanı render etməsin
 
     const settings = {
         dots: true,
         infinite: false,
-        arrows: showArrows,
+        arrows: false,
         speed: 500,
-        slidesToShow,
+        slidesToShow: 4,
         slidesToScroll: 1,
         nextArrow: <CustomNextArrow />,
+        responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    arrows: true,
+                },
+            },
+            {
+                breakpoint: 1279,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    arrows: true,
+                },
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: true,
+                },
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     return (
