@@ -2,6 +2,7 @@ import { Rating } from "@mui/material";
 import { GrFavorite } from "react-icons/gr";
 import CsButton from "./CsButton";
 import { useRouter } from "next/navigation";
+import { Review } from "@/types/types";
 
 type Props = {
     id: string;
@@ -9,10 +10,10 @@ type Props = {
     price: number;
     image: string;
     rating: number;
-    reviews: number;
+    reviews: Review[];
 }
 
-const Cart = ({ name, price, image, rating, reviews, id }: Props) => {
+const Cart = ({ name, price, image, rating, id }: Props) => {
     const router = useRouter()
 
     return (

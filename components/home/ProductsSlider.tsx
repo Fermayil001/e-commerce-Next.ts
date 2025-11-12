@@ -1,5 +1,4 @@
 'use client'
-import { SAMPLE_PRODUCTS } from "@/data/data";
 import Cart from "../ui/Cart";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -7,8 +6,15 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import { useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { CategoryType } from "@/hooks/categories/useCategories";
+import { ProductType } from "@/types/types";
 
-const ProductsSlider = ({ selectedCat }: { selectedCat: string }) => {
+interface ProductsSliderProps {
+    selectedCat: CategoryType
+    products: ProductType[]
+}
+
+const ProductsSlider = ({ selectedCat, products }: ProductsSliderProps) => {
     const prevRef = useRef<HTMLDivElement>(null);
     const nextRef = useRef<HTMLDivElement>(null);
     const [isBeginning, setIsBeginning] = useState(true);
@@ -16,7 +22,7 @@ const ProductsSlider = ({ selectedCat }: { selectedCat: string }) => {
 
     return (
         <div className="slider-container px-4 my-10 md:my-5 relative border-b border-csborder pb-10">
-            <h2 className="mb-4 text-xl md:text-2xl font-bold text-csgray">{selectedCat}</h2>
+            <h2 className="mb-4 text-xl md:text-2xl font-bold text-csgray">{selectedCat.name}</h2>
 
             {/* Sol ox */}
             <div
@@ -44,7 +50,7 @@ const ProductsSlider = ({ selectedCat }: { selectedCat: string }) => {
                 <FaChevronRight className="text-sm" />
             </div>
 
-            {/* 🔹 Swiper */}
+            {/* Swiper */}
             <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
@@ -76,14 +82,14 @@ const ProductsSlider = ({ selectedCat }: { selectedCat: string }) => {
                 }}
                 className="mySwiper h-full!"
             >
-                {SAMPLE_PRODUCTS.map(product => (
+                {products?.map(product => (
                     <SwiperSlide key={product.id} className="flex justify-center">
                         <Cart
                             id={product.id.toString()}
-                            image={product.image}
+                            image={product.images[0]}
                             name={product.name}
                             price={product.price}
-                            rating={product.rating}
+                            rating={product.reviews.map(r => r.rating).reduce((a, b) => a + b, 0) / product.reviews.length || 0}
                             reviews={product.reviews}
                         />
                     </SwiperSlide>

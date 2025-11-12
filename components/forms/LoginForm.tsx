@@ -1,27 +1,33 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import CsInput from "../navbar/CsInput"
 import CsButton from "../ui/CsButton"
+import { useLogin } from "@/hooks/auth/useLogin"
+import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 
 export default function LoginForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const { mutateAsync } = useLogin()
+    const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Handle login logic here
         if (!email || !password) {
             setError("Please fill in all fields")
             return
         }
-        setError("")
-        // Simulate successful login
-        console.log("Login attempt:", { email, password })
+        try {
+            await mutateAsync({ email, password })
+            router.push("/profile");
+        } catch (error) {
+            toast.error(error instanceof Error ? error.message : "An unexpected error occurred");
+        }
     }
 
     return (
@@ -39,8 +45,8 @@ export default function LoginForm() {
                             id="email"
                             type="email"
                             placeholder="you@example.com"
-                        /*   value={email}
-                          onChange={(e) => setEmail(e.target.value)} */
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
@@ -50,8 +56,8 @@ export default function LoginForm() {
                             id="password"
                             type="password"
                             placeholder="••••••••"
-                        /*    value={password}
-                           onChange={(e) => setPassword(e.target.value)} */
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 

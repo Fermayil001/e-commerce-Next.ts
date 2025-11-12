@@ -1,0 +1,149 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Account {
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String  @db.ObjectId
+    type              String
+    provider          String
+    providerAccountId String  @map("provider_account_id")
+    refresh_token     String? @db.String
+    access_token      String? @db.String
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.String
+    session_state     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+    @@map("accounts")
+}
+
+model User {
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    name           String?
+    email          String?  @unique
+    hashedPassword String?
+    role           Role     @default(USER)
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+
+    adresses      Adress[]   @relation("UserAdresses")
+    orders        Order[]    @relation("UserOrders")
+    wishlistItems Wishlist[] @relation("UserWishlist")
+    accounts      Account[]
+    reviews       Review[]
+
+    @@map("users")
+}
+
+model Adress {
+    id     String  @id @default(auto()) @map("_id") @db.ObjectId
+    adress String
+    city   String?
+    postal String?
+    userId String  @db.ObjectId
+
+    user User @relation("UserAdresses", fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("adresses")
+}
+
+model Order {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId      String   @db.ObjectId
+    totalAmount Float
+    status      String   @default("pending")
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    user  User        @relation("UserOrders", fields: [userId], references: [id], onDelete: Cascade)
+    items OrderItem[] @relation("OrderToItems")
+
+    @@map("orders")
+}
+
+model OrderItem {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    orderId   String @db.ObjectId
+    productId String
+    quantity  Int
+    price     Float
+
+    order Order @relation("OrderToItems", fields: [orderId], references: [id], onDelete: Cascade)
+
+    @@map("order_items")
+}
+
+model Wishlist {
+    id       String         @id @default(auto()) @map("_id") @db.ObjectId
+    userId   String         @unique @db.ObjectId
+    products WishlistItem[] @relation("WishlistToItems")
+    user     User           @relation("UserWishlist", fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("wishlists")
+}
+
+model WishlistItem {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    wishlistId String   @db.ObjectId
+    productId  String
+    addedAt    DateTime @default(now())
+    wishlist   Wishlist @relation("WishlistToItems", fields: [wishlistId], references: [id], onDelete: Cascade)
+
+    @@map("wishlist_items")
+}
+
+model Product {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    name        String
+    description String?
+    price       Float
+    stock       Int      @default(0)
+    images      String[] // şəkil URL-ləri
+    categoryId  String   @db.ObjectId
+    category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    reviews     Review[] // user-lərin şərhləri
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@map("products")
+}
+
+model Category {
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    name      String    @unique
+    products  Product[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+
+    @@map("categories")
+}
+
+model Review {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String   @db.ObjectId
+    productId String   @db.ObjectId
+    rating    Int      @default(0) 
+    comment   String?
+    createdAt DateTime @default(now())
+
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, productId]) // hər user bir məhsula yalnız 1 review yaza bilər
+    @@map("reviews")
+}
+
+enum Role {
+    USER
+    ADMIN
+}

@@ -5,9 +5,11 @@ interface CsInputProps {
   type?: string
   placeholder: string
   name?: string
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const CsInput = ({ id, placeholder, type = 'text', name }: CsInputProps) => {
+const CsInput = ({ id, placeholder, type = 'text', name, value, onChange }: CsInputProps) => {
   return (
     <input
       className="
@@ -31,6 +33,8 @@ const CsInput = ({ id, placeholder, type = 'text', name }: CsInputProps) => {
       placeholder={placeholder}
       id={id}
       name={name}
+      value={value}
+      onChange={onChange}
     />
 
 

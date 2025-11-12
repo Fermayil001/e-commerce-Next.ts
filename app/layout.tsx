@@ -3,6 +3,8 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import QueryProvider from "@/providers/QueryProvider";
+import { ToastContainer } from 'react-toastify';
 
 const poppins = Geist({
   subsets: ["latin"],
@@ -24,11 +26,14 @@ export default function RootLayout({
       <body
         className={`${poppins.className}  antialiased`}
       >
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="grow w-full md:w-[97%] mx-auto px-4 py-8">{children}</main>
-          <Footer />
-        </div>
+        <QueryProvider>
+          <div className="flex flex-col min-h-screen">
+            <ToastContainer />
+            <Navbar />
+            <main className="grow w-full md:w-[97%] mx-auto px-4 py-8">{children}</main>
+            <Footer />
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );

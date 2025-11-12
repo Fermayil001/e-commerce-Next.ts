@@ -1,55 +1,40 @@
 'use client'
-import { useState } from "react"
-import Category, { CategoryType } from "./Category"
-// import ProductsSlider from "./ProductsSlider"
+import { useEffect, useState } from "react"
+import Category from "./Category"
 import dynamic from 'next/dynamic';
 import CsButton from "../ui/CsButton";
 import { CgDetailsMore } from "react-icons/cg";
 import ProductsSlider from "./ProductsSlider";
-
-
-
-const categories: CategoryType[] = [
-    {
-        id: 1,
-        name: "All"
-    },
-    {
-        id: 2,
-        name: "Electronics"
-    },
-    {
-        id: 3,
-        name: "Clothes"
-    },
-    {
-        id: 4,
-        name: "Shoes"
-    },
-    {
-        id: 5,
-        name: "Bags"
-    },
-    {
-        id: 6,
-        name: "Accessories"
-    }
-]
+import { CategoryType, useGetCategories } from "@/hooks/categories/useCategories";
+import { useFilteredProducts } from "@/hooks/product/useFilteredProducts";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const Products = () => {
-    const [selectedCat, setSelectedCat] = useState<string>("All")
+    const [selectedCat, setSelectedCat] = useState<CategoryType>({ id: '0', name: 'All' });
     const [visibleCount, setVisibleCount] = useState<number>(3)
+    const { data: categories } = useGetCategories();
+
+    const { data: productsRes, isLoading } = useFilteredProducts({
+        ...(selectedCat.id === "0" ? {} : { categoryId: selectedCat.id }),
+        enabled: selectedCat.id !== null && selectedCat.id !== undefined
+    });
+
+    if (categories === undefined || categories.length === 0) return
+    const products = productsRes?.products
 
     const handleCategoryClick = (category: CategoryType) => {
-        setSelectedCat(category.name)
+        setSelectedCat(category)
     }
 
-    const visibleProducts = selectedCat === "All"
-        ? categories.slice(0, visibleCount) // Show all products
-        : categories.filter(cat => cat.name === selectedCat); // Filter products by selected category
+    console.log(selectedCat.id, 'selectedCat.id ')
+    console.log(products, 'productsproducts')
+
+    const visibleProducts = selectedCat.name === "All"
+        ? categories?.slice(0, visibleCount)
+        : categories?.filter(cat => cat.name === selectedCat.name);
 
     const handleShowMore = () => {
-        if (selectedCat != "All") return
+        if (selectedCat.name !== "All") return
         if (visibleCount < categories.length) {
             setVisibleCount(visibleCount + 3)
         } else {
@@ -61,12 +46,12 @@ const Products = () => {
         <section>
             <Category onCategoryClick={handleCategoryClick} categories={categories} selectedCat={selectedCat} />
             {
-                visibleProducts.map(cat => <ProductsSlider key={cat.id} selectedCat={cat.name} />)
+                isLoading ? <LoadingSpinner /> : visibleProducts.map(cat => <ProductsSlider key={cat.id} selectedCat={cat} products={products} />)
             }
 
             <div className="flex justify-end mt-6">
                 {
-                    selectedCat === "All" && (
+                    selectedCat.name === "All" && (
                         <CsButton
                             className="gap-2"
                             variant="secondary"
@@ -82,14 +67,6 @@ const Products = () => {
                     )
                 }
             </div>
-
-            {/*    {
-                selectedCat === "All"
-                    ? visibleProducts.map(cat => (
-                        <ProductsSliderClient key={cat.id} selectedCat={cat.name} />
-                    ))
-                    : <ProductsSliderClient selectedCat={selectedCat} />
-            } */}
         </section>
     )
 }

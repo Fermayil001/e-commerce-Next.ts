@@ -6,6 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import CsInput from "../navbar/CsInput"
 import CsButton from "../ui/CsButton"
+import { useRegister } from "@/hooks/auth/useRegister"
 
 export default function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ export default function RegisterForm() {
         confirmPassword: "",
     })
     const [error, setError] = useState("")
+    const { mutate, isPending, isSuccess, isError } = useRegister();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -33,6 +35,7 @@ export default function RegisterForm() {
         }
         setError("")
         console.log("Register attempt:", formData)
+        mutate(formData);
     }
 
     return (
@@ -50,8 +53,8 @@ export default function RegisterForm() {
                             id="name"
                             name="name"
                             placeholder="Your name"
-                        /* value={formData.name}
-                        onChange={handleChange} */
+                            value={formData.name}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -62,8 +65,8 @@ export default function RegisterForm() {
                             name="email"
                             type="email"
                             placeholder="you@example.com"
-                        /* value={formData.email}
-                        onChange={handleChange} */
+                            value={formData.email}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -74,8 +77,8 @@ export default function RegisterForm() {
                             name="password"
                             type="password"
                             placeholder="••••••••"
-                        /* value={formData.password}
-                        onChange={handleChange} */
+                            value={formData.password}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -86,8 +89,8 @@ export default function RegisterForm() {
                             name="confirmPassword"
                             type="password"
                             placeholder="••••••••"
-                        /*     value={formData.confirmPassword}
-                            onChange={handleChange} */
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
                         />
                     </div>
 
