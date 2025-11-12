@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/libs/prismadb";
 
 export async function GET(
-    req: Request,
-    context: { params: { id: string } }
+    request: NextRequest,
+    context: { params: Promise<{ id: string }> } // Vercel build üçün Promise
 ) {
-    const { id } = context.params;
+    const { id } = await context.params;
 
     const product = await prisma.product.findUnique({
         where: { id },
