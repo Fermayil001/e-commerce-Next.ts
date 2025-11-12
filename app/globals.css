@@ -24,6 +24,9 @@
   .cstransition {
     @apply transition-all duration-300 ease-in-out;
   }
+  .bordercs {
+    @apply border border-csborder shadow-sm;
+  }
 }
 
 /* .slick-prev::before,
