@@ -18,7 +18,7 @@ const InfoTab = ({ user }: InfoTabProps) => {
         <div className="flex-1 mt-6 space-y-6">
             {
                 showEdit && <CsModal onClose={() => setShowEdit(false)} title="Profili redaktə et">
-                    <EditProfForm closeModal={() => setShowEdit(false)} user={user} />
+                    <EditProfForm closeModal={() => setShowEdit(false)} userId={user.id} userName={user.name || ''} userPhone={user.phone || ''} />
                 </CsModal>
             }
             {

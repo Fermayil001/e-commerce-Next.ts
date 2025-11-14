@@ -5,10 +5,12 @@ import { useUpdateUser } from '@/hooks/user/useUpdateUser';
 import { toast } from 'react-toastify';
 
 interface EditProfFormProps {
-    user: User
+    userId: string;
+    userName: string;
+    userPhone: string;
     closeModal: () => void;
 }
-const EditProfForm = ({ user, closeModal }: EditProfFormProps) => {
+const EditProfForm = ({ userId, userName, userPhone, closeModal }: EditProfFormProps) => {
 
     const { mutateAsync: updateUser } = useUpdateUser();
 
@@ -31,16 +33,16 @@ const EditProfForm = ({ user, closeModal }: EditProfFormProps) => {
     });
 
     const initialValues = {
-        name: user?.name?.split(' ')[0] || '',
-        surname: user?.name?.split(' ')[1] || '',
-        phone: user?.phone || '',
+        name: userName?.split(' ')[0] || '',
+        surname: userName?.split(' ')[1] || '',
+        phone: userPhone || '',
     };
 
     const handleSubmit = async (values: any) => {
         const name = values.name + ' ' + values.surname;
         try {
             await updateUser({
-                id: user.id,
+                id: userId,
                 name,
                 phone: values.phone
             });
