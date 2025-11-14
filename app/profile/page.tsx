@@ -1,4 +1,3 @@
-import PersonalInfo from "@/components/profile/PersonalInfo"
 import ProfHeader from "@/components/profile/ProfHeader"
 import ProfileCard from "@/components/profile/ProfileCard"
 import { getCurrentUser } from "../actions/getCurrentUser"
@@ -11,12 +10,12 @@ export default async function ProfilePage() {
 
     return (
         <div className="min-h-screen">
-            <div className=" mx-auto py-8">
+            <div className="mx-auto py-8">
                 {/* Header */}
                 <ProfHeader />
                 {/* Profile Card */}
                 <ProfileCard currentUser={currentUser} />
-                <Tabs />
+                <Tabs user={currentUser} />
 
             </div>
         </div>

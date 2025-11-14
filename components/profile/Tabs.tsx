@@ -1,27 +1,30 @@
 'use client'
-
 import { useState, lazy, Suspense, JSX } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
-// import OrdersTab from "./OrdersTab";
+import { User } from "@prisma/client";
 
-// Lazy-loaded tab components
-const PersonalInfo = lazy(() => import("../profile/PersonalInfo"));
+const PersonalInfo = lazy(() => import("./InfoTab"));
 const Orders = lazy(() => import("./OrdersTab"));
-/* const Addresses = lazy(() => import("./Addresses"));
-const Wishlist = lazy(() => import("./Wishlist")); */
+const Addresses = lazy(() => import("./AddressesTab"));
+const Wishlist = lazy(() => import("./WishlistTab"));
 
-type TabsType = 'Personal info' | 'Orders' | 'Addresses' | 'Wishlist';
+type TabsType = 'Məlumatlar' | 'Sifarişlər' | 'Ünvanlar' | 'Favorilər';
 
-export default function Tabs() {
-    const tabs: TabsType[] = ["Personal info", "Orders", "Addresses", "Wishlist"];
-    const [activeTab, setActiveTab] = useState<TabsType>('Personal info');
+interface TabsProps {
+    user: User | null
+}
 
-    // Map each tab to its content component
+export default function Tabs({ user }: TabsProps) {
+    const tabs: TabsType[] = ["Məlumatlar", "Sifarişlər", "Ünvanlar", "Favorilər"];
+    const [activeTab, setActiveTab] = useState<TabsType>('Məlumatlar');
+
+    if (!user) return
+    
     const contentMap: Record<TabsType, JSX.Element> = {
-        "Personal info": <PersonalInfo />,
-        "Orders": <Orders />,
-        "Addresses": <PersonalInfo />,
-        "Wishlist": <PersonalInfo />,
+        "Məlumatlar": <PersonalInfo user={user} />,
+        "Sifarişlər": <Orders />,
+        "Ünvanlar": <Addresses />,
+        "Favorilər": <Wishlist />,
     };
 
     return (

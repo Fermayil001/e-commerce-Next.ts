@@ -26,9 +26,6 @@ const Products = () => {
         setSelectedCat(category)
     }
 
-    console.log(selectedCat.id, 'selectedCat.id ')
-    console.log(products, 'productsproducts')
-
     const visibleProducts = selectedCat.name === "All"
         ? categories?.slice(0, visibleCount)
         : categories?.filter(cat => cat.name === selectedCat.name);

@@ -10,7 +10,7 @@ import User from "./User"
 const Navbar = async () => {
 
   const currentUser = await getCurrentUser()
-  console.log(currentUser)
+  
   return (
     <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 bg-cswhite text-cswhite border-b border-csborder">
       <Logo />

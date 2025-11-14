@@ -1,14 +1,16 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import CsInput from "../navbar/CsInput"
 import CsButton from "../ui/CsButton"
 import { useRegister } from "@/hooks/auth/useRegister"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
 
 export default function RegisterForm() {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -16,7 +18,7 @@ export default function RegisterForm() {
         confirmPassword: "",
     })
     const [error, setError] = useState("")
-    const { mutate, isPending, isSuccess, isError } = useRegister();
+    const { mutateAsync } = useRegister();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -26,16 +28,21 @@ export default function RegisterForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-            setError("Please fill in all fields")
+            setError("Zəhmət olmasa bütün sahələri doldurun")
             return
         }
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match")
+            setError("Şifrələr eyni deyil")
             return
         }
         setError("")
-        console.log("Register attempt:", formData)
-        mutate(formData);
+        try {
+            mutateAsync(formData);
+            toast.success("Qeydiyyat uğurla tamamlandı!")
+            router.push("/login")
+        } catch (error: any) {
+            toast.error(error.message || "Qeydiyyat uğursuz!")
+        }
     }
 
     return (

@@ -18,8 +18,8 @@ const ProfHeader = () => {
                     </CsButton>
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900">My Account</h1>
-                    <p className="text-slate-600">Manage your profile and orders</p>
+                    <h1 className="text-xl md:text-3xl font-bold text-slate-900">Hesabım</h1>
+                    <p className="text-sm md:text-base text-slate-600">Profilinizi və sifarişlərinizi idarə edin</p>
                 </div>
             </div>
             <CsButton
@@ -28,7 +28,7 @@ const ProfHeader = () => {
                 size="small"
             >
                 <BiLogOut className="h-4 w-4 mr-2" />
-                Sign Out
+                Çıxış
             </CsButton>
         </div>
     )
