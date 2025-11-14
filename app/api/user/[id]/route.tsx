@@ -1,9 +1,11 @@
 import { prisma } from "@/libs/prismadb";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
+export async function GET(
+    req: Request,
+    context: { params: Promise<{ id: string }> }
+) {
+    const { id } = await context.params;
 
     if (!id || id.trim() === "") {
         return NextResponse.json(
@@ -34,9 +36,11 @@ export async function GET(req: Request) {
 }
 
 
-export async function PUT(req: Request, context: { params: { id: string } }) {
-    const params = await context.params;
-    const id = params.id;
+export async function PUT(
+    req: Request,
+    context: { params: Promise<{ id: string }> }
+) {
+    const { id } = await context.params;
 
     if (!id) {
         return NextResponse.json(

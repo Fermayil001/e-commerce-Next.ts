@@ -78,7 +78,7 @@ const DynamicForm = ({
                     ))}
 
                     <CsButton className='w-full mt-2' type="submit" variant='primary' disabled={isSubmitting}>
-                        {isSubmitting ? <LoadingSpinner /> : submitLabel}
+                        {isSubmitting ? <LoadingSpinner className='border-cswhite! h-5! w-5! '/> : submitLabel}
                     </CsButton>
                 </Form>
             )}
