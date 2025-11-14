@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { prisma } from "@/libs/prismadb";
 import { Buffer } from "buffer";
+import { Prisma } from "@prisma/client";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -44,7 +45,7 @@ export async function POST(req: Request) {
 
         const updatedUser = await prisma.user.update({
             where: { email: session.user.email },
-            data: { image: imageUrl },
+            data: { image: imageUrl } as Prisma.UserUpdateInput,
         });
 
         return NextResponse.json({ user: updatedUser });
