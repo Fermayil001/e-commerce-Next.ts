@@ -1,3 +1,4 @@
+import { ProductType } from "@/types/types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useProducts = () => {
@@ -15,7 +16,8 @@ export const useProductById = (id: string) => {
         queryKey: ["product", id],
         queryFn: async () => {
             const res = await fetch(`/api/products/${id}`);
-            return res.json();
+            const data = await res.json()
+            return data as ProductType;
         }
     });
 };

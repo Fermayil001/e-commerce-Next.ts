@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import CsButton from '../ui/CsButton';
 import CsInput from '../navbar/CsInput';
@@ -9,6 +9,7 @@ export interface FieldConfig {
     type: 'text' | 'password' | 'file' | 'number' | 'email' | 'tel' | 'textarea';
     accept?: string;
     colSpan?: number;
+    placeholder?: string;
 }
 
 interface DynamicFormProps {
@@ -34,12 +35,12 @@ const DynamicForm = ({
         <Formik initialValues={initialValues} validationSchema={validationSchema} enableReinitialize={true} onSubmit={onSubmit}>
             {({ setFieldValue, isSubmitting, values }) => (
                 <Form className="flex flex-col gap-4!">
-                    {fields.map(({ name, type, accept, colSpan = 1 }) => (
+                    {fields.map(({ name, type, accept, colSpan = 1, placeholder }) => (
                         <div
                             key={name}
                             className={`flex flex-col ${colSpan === 2 ? 'sm:col-span-2' : ''}`}
                         >
-                            <label htmlFor={name} className="mb-1 text-sm font-medium text-gray-700">
+                            <label htmlFor={name} className="mb-1 text-csblack">
                                 {fieldLabels[name]}
                             </label>
 
@@ -70,7 +71,7 @@ const DynamicForm = ({
                                         type={type}
                                         value={values[name]}
                                         onChange={(e) => setFieldValue(name, e.target.value)}
-                                        placeholder={type === 'tel' ? '+994501112233' : fieldLabels[name]}
+                                        placeholder={type === 'tel' ? '+994501112233' : placeholder ? placeholder : fieldLabels[name]}
                                     />
                             )}
                             <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
@@ -78,7 +79,7 @@ const DynamicForm = ({
                     ))}
 
                     <CsButton className='w-full mt-2' type="submit" variant='primary' disabled={isSubmitting}>
-                        {isSubmitting ? <LoadingSpinner className='border-cswhite! h-5! w-5! '/> : submitLabel}
+                        {isSubmitting ? <LoadingSpinner className='border-cswhite! h-5! w-5! ' /> : submitLabel}
                     </CsButton>
                 </Form>
             )}

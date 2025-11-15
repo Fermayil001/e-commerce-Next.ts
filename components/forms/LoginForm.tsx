@@ -1,77 +1,68 @@
 "use client"
-
-import type React from "react"
-import { useState } from "react"
 import Link from "next/link"
-import CsInput from "../navbar/CsInput"
-import CsButton from "../ui/CsButton"
 import { useLogin } from "@/hooks/auth/useLogin"
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
+import * as Yup from "yup"
+import DynamicForm from "./DynamicForm"
+
+interface LoginFormValues {
+    email: string
+    password: string
+}
 
 export default function LoginForm() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
     const { mutateAsync } = useLogin()
-    const router = useRouter();
+    const router = useRouter()
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (!email || !password) {
-            setError("Please fill in all fields")
-            return
-        }
+    const initialValues: LoginFormValues = {
+        email: "",
+        password: "",
+    }
+
+    const validationSchema = Yup.object({
+        email: Yup.string().email("Invalid email address").required("Email is required"),
+        password: Yup.string().required("Password is required"),
+    })
+
+    const handleSubmit = async (values: LoginFormValues) => {
         try {
-            await mutateAsync({ email, password })
-            router.push("/profile");
+            await mutateAsync(values)
+            router.push("/profile")
+            router.refresh()
         } catch (error) {
-            toast.error(error instanceof Error ? error.message : "An unexpected error occurred");
+            toast.error(error instanceof Error ? error.message : "An unexpected error occurred")
         }
     }
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-slate-50 to-slate-100">
-            <div className="w-full max-w-md p-6 md:p-8">
+            <div className="w-full max-w-md p-2 md:p-8">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-slate-900">Welcome Back</h1>
                     <p className="mt-2 text-slate-600">Sign in to your LOTSIA account</p>
                 </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                        <label htmlFor="email">Email</label>
-                        <CsInput
-                            id="email"
-                            type="email"
-                            placeholder="you@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <label htmlFor="password">Password</label>
-                        <CsInput
-                            id="password"
-                            type="password"
-                            placeholder="••••••••"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    {error && <p className="text-sm text-red-500">{error}</p>}
-
-                    <CsButton
-                        variant="primary"
-                        type="submit"
-                        className="w-full"
-                    >
-                        Sign In
-                    </CsButton>
-                </form>
-
+                <DynamicForm
+                    fields={[
+                        {
+                            name: "email",
+                            type: "email",
+                            placeholder: "you@example.com",
+                        },
+                        {
+                            name: "password",
+                            type: "password",
+                            placeholder: "••••••••",
+                        },
+                    ]}
+                    fieldLabels={{
+                        email: "Email",
+                        password: "Şifrə",
+                    }}
+                    validationSchema={validationSchema}
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                />
                 <div className="mt-6 text-center text-sm">
                     <p className="text-slate-600">
                         Don't have an account?{" "}

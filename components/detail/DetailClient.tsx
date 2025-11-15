@@ -7,6 +7,8 @@ import { ProductType } from "@/data/data"
 import { useState } from "react"
 import CsInput from "../navbar/CsInput"
 import { CsTextarea } from "../ui/CsTextarea"
+import { useProductById } from "@/hooks/product/useProducts"
+import LoadingSpinner from "../ui/LoadingSpinner"
 
 interface Comment {
     id: number
@@ -16,7 +18,9 @@ interface Comment {
     date: string
 }
 
-const DetailClient = ({ product }: { product: ProductType }) => {
+const DetailClient = ({ id }: { id: string }) => {
+    const { data: product, isLoading } = useProductById(id)
+
     const [comments, setComments] = useState<Comment[]>([
         {
             id: 1,
@@ -36,11 +40,23 @@ const DetailClient = ({ product }: { product: ProductType }) => {
     const [newComment, setNewComment] = useState({ author: "", rating: 5, text: "" })
     const [quantity, setQuantity] = useState(1)
 
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (!product) {
+        return <div>Product not found</div>
+    }
+    const averageRating =
+        product.reviews.length > 0
+            ? product.reviews.reduce((acc, cur) => acc + (cur.rating || 0), 0) / product.reviews.length
+            : 0;
+
     return (
         <div className="grid gap-8 md:grid-cols-2">
             {/* Image Section */}
             <div className="flex items-center justify-center rounded-lg bg-slate-100 p-8">
-                <img src={product.image || "/placeholder.svg"} alt={product.name} className="h-full w-full object-cover" />
+                <img src={product.images?.[0] || "/placeholder.svg"} alt={product.name} className="h-full w-full object-cover" />
             </div>
 
             {/* Details Section */}
@@ -53,10 +69,10 @@ const DetailClient = ({ product }: { product: ProductType }) => {
                 {/* Rating */}
                 <div className="flex items-center gap-4">
                     <div className="flex gap-1">
-                        <Rating name="read-only" value={product.rating} readOnly />
+                        <Rating name="read-only" value={averageRating} readOnly />
                     </div>
                     <span className="text-sm text-slate-600">
-                        {product.rating} ({product.reviews} reviews)
+                        {averageRating} ({product.reviews.length} reviews)
                     </span>
                 </div>
 
@@ -89,10 +105,10 @@ const DetailClient = ({ product }: { product: ProductType }) => {
                         size="large"
                         className="flex-1"
                         variant="primary"
-                       /*  onClick={() => {
-                            addToCart(product.id, product.name, product.price, quantity)
-                            setQuantity(1)
-                        }} */
+                    /*  onClick={() => {
+                         addToCart(product.id, product.name, product.price, quantity)
+                         setQuantity(1)
+                     }} */
                     >
                         Add to Cart
                     </CsButton>

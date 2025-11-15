@@ -14,8 +14,8 @@ const registerUser = async (data: RegisterData) => {
     });
 
     if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Failed to register");
+        const response = await res.json();
+        throw new Error(response.error || "Failed to register");
     }
 
     return res.json();

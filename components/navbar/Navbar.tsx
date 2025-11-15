@@ -1,16 +1,14 @@
-import Link from "next/link"
-import CsButton from "../ui/CsButton"
 import HamburgerMenu from "./HamburgerMenu"
 import Logo from "./Logo"
 import NavLinks from "./NavLinks"
 import OrderCount from "./OrderCount"
 import { getCurrentUser } from "@/app/actions/getCurrentUser"
-import User from "./User"
+import UserSection from "./UserSection"
 
 const Navbar = async () => {
 
   const currentUser = await getCurrentUser()
-  
+
   return (
     <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 bg-cswhite text-cswhite border-b border-csborder">
       <Logo />
@@ -18,7 +16,8 @@ const Navbar = async () => {
       <NavLinks />
       {/* <Favorites /> */}
       <div className="flex gap-2 md:4 items-center">
-        {
+        <UserSection initialUser={currentUser} />
+      {/*   {
           currentUser
             ? <User />
             : (
@@ -31,7 +30,7 @@ const Navbar = async () => {
                 </CsButton>
               </>
             )
-        }
+        } */}
         <OrderCount />
         <HamburgerMenu />
       </div>

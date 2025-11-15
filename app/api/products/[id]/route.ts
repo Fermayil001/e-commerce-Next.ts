@@ -3,7 +3,7 @@ import { prisma } from "@/libs/prismadb";
 
 export async function GET(
     request: NextRequest,
-    context: { params: Promise<{ id: string }> } // Vercel build üçün Promise
+    context: { params: Promise<{ id: string }> }
 ) {
     const { id } = await context.params;
 
