@@ -19,6 +19,7 @@
     "@types/bcrypt": "^6.0.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.8.0",
+    "dayjs": "^1.11.19",
     "formidable": "^3.5.4",
     "formik": "^2.4.9",
     "icons": "^1.0.0",
