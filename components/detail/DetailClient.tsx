@@ -9,15 +9,18 @@ import LoadingSpinner from "../ui/LoadingSpinner"
 import { useGetReview } from "@/hooks/review/useReview"
 import dayjs from "@/libs/dayjs"
 import { MdOutlineFavorite } from "react-icons/md";
+import { LiaCartPlusSolid } from "react-icons/lia";
+import { useCart } from "@/stores/cartStore"
 
 
 const DetailClient = ({ id }: { id: string }) => {
     const { data: product, isLoading } = useProductById(id)
     const [newComment, setNewComment] = useState({ rating: 0, text: "" })
+    const [liked, setLiked] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const { mutateAsync: addReview, isPending } = useAddReview()
     const { data: reviews, refetch } = useGetReview(id)
-    console.log(isPending, 'isLoadingisLoading')
+    const { addToCart } = useCart()
 
     if (isLoading) {
         return <LoadingSpinner />
@@ -116,22 +119,33 @@ const DetailClient = ({ id }: { id: string }) => {
                 <div className="flex gap-3">
                     <CsButton
                         size="large"
-                        className="flex-1"
+                        className="flex-1 gap-2"
                         variant="primary"
-                    /*  onClick={() => {
-                         addToCart(product.id, product.name, product.price, quantity)
-                         setQuantity(1)
-                     }} */
+                        onClick={() => {
+                            addToCart({
+                                id: product.id,
+                                name: product.name,
+                                price: product.price,
+                                image: product.images?.[0]
+                            })
+                            // Set the correct quantity after adding to cart
+                            if (quantity > 1) {
+                                const { updateQuantity } = useCart.getState()
+                                updateQuantity(product.id, quantity)
+                            }
+                            setQuantity(1)
+                        }}
                     >
-                        Səbətə əlavə et
+                        <LiaCartPlusSolid size={24} />
+                        Səbətə əlavə Et
                     </CsButton>
-                    <CsButton size="large" variant="secondary"
-                        // onClick={() => setLiked(!liked)}
-                        className="gap-2"
+                   {/*  <CsButton size="large" variant="secondary"
+                        onClick={() => setLiked(!liked)}
+                        className="gap-2 md:min-w-[172px]"
                     >
-                        <MdOutlineFavorite className={`h-5 w-5  fill-red-500 }`} />
-                        {/* {liked ? "Favoritlərdə" : "Save"} */}Favorit et
-                    </CsButton>
+                        <MdOutlineFavorite size={24} className={`${liked ? "fill-red-500" : "fill-slate-400"}`} />
+                        {liked ? "Favoritlərdə" : "Favorit"}
+                    </CsButton> */}
                     <CsButton size="large" variant="secondary" onClick={handleShare}>
                         <CiShare2 className="h-5 w-5" />
                     </CsButton>

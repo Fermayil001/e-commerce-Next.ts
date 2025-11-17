@@ -8,6 +8,8 @@ import { useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CategoryType } from "@/hooks/categories/useCategories";
 import { ProductType } from "@/types/types";
+import { useCart } from "@/stores/cartStore";
+import { toast } from "react-toastify";
 
 interface ProductsSliderProps {
     selectedCat: CategoryType
@@ -19,6 +21,12 @@ const ProductsSlider = ({ selectedCat, products }: ProductsSliderProps) => {
     const nextRef = useRef<HTMLDivElement>(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const { addToCart } = useCart()
+
+    const handleAddToCart = (product: ProductType) => {
+        addToCart(product)
+        toast.success('Məhsul səbətə əlavə edildi')
+    }
 
     return (
         <div className="slider-container px-4 my-10 md:my-5 relative border-b border-csborder pb-10">
@@ -91,6 +99,7 @@ const ProductsSlider = ({ selectedCat, products }: ProductsSliderProps) => {
                             price={product.price}
                             rating={product.reviews.map(r => r.rating).reduce((a, b) => a + b, 0) / product.reviews.length || 0}
                             reviews={product.reviews}
+                            addToCart={() => handleAddToCart(product)}
                         />
                     </SwiperSlide>
                 ))}
