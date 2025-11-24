@@ -12,7 +12,7 @@ export default function AboutPage() {
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-csblack text-4xl md:text-5xl font-bold mb-4 text-balance">Haqqımızda</h1>
                     <p className="text-csblack text-lg opacity-90 max-w-2xl mx-auto">
-                        LOTOSIA ilə lüks və elegansiyanın mükəmməl tərkibinə xoş gəlmisiniz
+                        <span className="text-[#e9980d] font-">TRENDORA</span> ilə lüks və elegansiyanın mükəmməl tərkibinə xoş gəlmisiniz
                     </p>
                 </div>
             </section>
@@ -24,11 +24,11 @@ export default function AboutPage() {
                         <h2 className="text-3xl font-bold mb-8 text-csblack">Bizim Hekayəmiz</h2>
                         <div className="space-y-6 text-slate-700 leading-relaxed">
                             <p>
-                                LOTSIA, L&T tərəfindən tasarlanmış, lüks və elegansiyanın hamısını bir yerdə toplayan bir brenddir. Hər
+                                TRENDORA, lüks və elegansiyanın hamısını bir yerdə toplayan bir brenddir. Hər
                                 məhsul ehtiyatla seçilir və ən yüksək keyfiyyət standartlarına uyğun gəlir.
                             </p>
                             <p>
-                                Biz inanırıq ki, həqiqi lüks sadəcə məhsul deyil, həm də bir yaşam tərzidir. Hər LOTSIA məhsulu, sizin
+                                Biz inanırıq ki, həqiqi lüks sadəcə məhsul deyil, həm də bir yaşam tərzidir. Hər TRENDORA məhsulu, sizin
                                 zövqünüzü və şəxsiyyətinizi ifadə etməyin bir yolundan ibarətdir.
                             </p>
                             <p>

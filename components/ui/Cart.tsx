@@ -1,8 +1,8 @@
 import { Rating } from "@mui/material";
-import { GrFavorite } from "react-icons/gr";
 import CsButton from "./CsButton";
 import { useRouter } from "next/navigation";
-import { ProductType, Review } from "@/types/types";
+import { Review } from "@/types/types";
+import { MdOutlineFavorite } from "react-icons/md";
 
 type Props = {
     id: string;
@@ -12,22 +12,25 @@ type Props = {
     rating: number;
     reviews: Review[];
     addToCart: () => void;
+    addToFav: () => void;
+    isFav?: boolean;
 }
 
-const Cart = ({ name, price, image, rating, id, addToCart }: Props) => {
+const Cart = ({ name, price, image, rating, id, addToCart, addToFav, isFav }: Props) => {
     const router = useRouter()
 
     return (
         <div className="border box-border border-csborder py-3 min-h-f mx-auto  flex flex-col gap-6 shadow-sm hover:shadow-lg cstransition">
             <div className="relative w-full h-[200px]  overflow-hidden">
-                <img src={image} className="object- hover:scale-105 cstransition w-full h-full" alt="" />
-               {/*  <button
+                <img src={image} className="object-contain hover:scale-105 cstransition w-full h-full" alt="" />
+                <button
+                    onClick={addToFav}
                     className="absolute cursor-pointer right-3 top-3 rounded-full bg-white p-2 shadow-md hover:bg-slate-100"
                 >
-                    <GrFavorite
-                        className={`h-5 w-5  fill-red-500 }`}
+                    <MdOutlineFavorite
+                        className={`h-5 w-5 ${isFav ? 'text-red-500' : 'text-slate-400'}`}
                     />
-                </button> */}
+                </button>
             </div>
             <div className="p-4 flex flex-col gap-3">
                 <h3 className="font-semibold text-slate-900">{name}</h3>

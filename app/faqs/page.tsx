@@ -9,9 +9,9 @@ export default function FAQPage() {
 
   const faqs = [
     {
-      question: "LOTSIA məhsulları harada satılır?",
+      question: "TRENDORA məhsulları harada satılır?",
       answer:
-        "LOTSIA məhsulları onlayn mağazamızda və seçilmiş fiziki mağazalarda mövcuddur. Siz bizim veb saytımız vasitəsilə əmir verə və evinizə çatdırma tələb edə bilərsiniz.",
+        "TRENDORA məhsulları onlayn mağazamızda və seçilmiş fiziki mağazalarda mövcuddur. Siz bizim veb saytımız vasitəsilə əmir verə və evinizə çatdırma tələb edə bilərsiniz.",
     },
     {
       question: "Çatdırma müddəti nə qədərdir?",
@@ -24,14 +24,14 @@ export default function FAQPage() {
         "Əgər məhsul ləkəsiz, istifadə edilməmiş vəziyyətdə və orijinal qablaşdırmasında olarsa, 30 günü ərzində qaytara bilərsiniz. Qayıtma prosesi sadə və pulsuz çatdırmadır.",
     },
     {
-      question: "LOTSIA məhsullarının tərkibi nədir?",
+      question: "TRENDORA məhsullarının tərkibi nədir?",
       answer:
-        "Bütün LOTSIA məhsulları ən yüksək keyfiyyətli materiallardan hazırlanmışdır. Hər məhsulun təfərrüatları onun səhifəsində, tərkib və istehsal sənədlərində göstərilir.",
+        "Bütün TRENDORA məhsulları ən yüksək keyfiyyətli materiallardan hazırlanmışdır. Hər məhsulun təfərrüatları onun səhifəsində, tərkib və istehsal sənədlərində göstərilir.",
     },
     {
       question: "Xüsusi əmirləri qəbul edirsiniz?",
       answer:
-        "Bəli, xüsusi əmirləri qəbul edirik. Əgər xüsusi bir şey istəyirsinizsə, lütfən bizimlə bilavasita əlaqə saxlayın: info@lotsia.com",
+        "Bəli, xüsusi əmirləri qəbul edirik. Əgər xüsusi bir şey istəyirsinizsə, lütfən bizimlə bilavasita əlaqə saxlayın: info@trendora.com",
     },
     {
       question: "Sifarişlərimi necə izlə edə bilərəm?",
@@ -51,7 +51,7 @@ export default function FAQPage() {
       <section className="bg-linear-to-b from-[#2d5a3d] to-[#1f3d2a] text-white py-16 rounded-md">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Tez-tez Soruşulan Suallar</h1>
-          <p className="text-lg opacity-90">LOTSIA haqqında ən çox soruşulan suallara cavablar</p>
+          <p className="text-lg opacity-90">TRENDORA haqqında ən çox soruşulan suallara cavablar</p>
         </div>
       </section>
 

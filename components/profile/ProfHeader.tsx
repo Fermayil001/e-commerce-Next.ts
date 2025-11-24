@@ -4,10 +4,15 @@ import CsButton from '../ui/CsButton'
 import { BsArrowLeft } from 'react-icons/bs'
 import { signOut } from 'next-auth/react'
 import { BiLogOut } from 'react-icons/bi'
+import { useState } from 'react'
+import LoadingSpinner from '../ui/LoadingSpinner'
 
 const ProfHeader = () => {
-    const handleSignOut = () => {
-        signOut({ redirect: true, callbackUrl: "/login" });
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const handleSignOut = async () => {
+        setIsLoading(true)
+        await signOut({ redirect: true, callbackUrl: "/login" });
+        setIsLoading(false)
     }
     return (
         <div className="mb-8 flex items-center justify-between">
@@ -28,7 +33,12 @@ const ProfHeader = () => {
                 size="small"
             >
                 <BiLogOut className="h-4 w-4 mr-2" />
-                Çıxış
+
+                {
+                    isLoading
+                        ? 'Çıxış edilir...'
+                        : 'Çıxış'
+                }
             </CsButton>
         </div>
     )

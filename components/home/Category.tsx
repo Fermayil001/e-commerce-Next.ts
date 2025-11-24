@@ -9,9 +9,8 @@ interface CategoryProps {
 }
 
 const Category = ({ onCategoryClick, categories, selectedCat }: CategoryProps) => {
-
     return (
-        <section className="mb-3">
+        <section className="mb-3" id="products">
             <h2 className="mb-6 text-2xl font-bold text-slate-900">Kateqoriyalar üzrə seçim</h2>
             <div className="flex flex-wrap gap-3">
                 <CsButton

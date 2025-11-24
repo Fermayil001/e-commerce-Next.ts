@@ -4,9 +4,10 @@ import { useEffect } from "react"
 import CsButton from "../ui/CsButton"
 import User from "./User"
 import { useUserStore } from "@/stores/userStore"
+import { User as UserType } from "@prisma/client"
 
 interface UserSectionProps {
-    initialUser: any // Server-dən gələn ilkin user
+    initialUser: UserType | null // Server-dən gələn ilkin user
 }
 
 const UserSection = ({ initialUser }: UserSectionProps) => {
@@ -24,7 +25,7 @@ const UserSection = ({ initialUser }: UserSectionProps) => {
     const displayUser = user || initialUser
 
     if (displayUser) {
-        return <User />
+        return <User imageUrl={displayUser.image} role={displayUser.role} />
     }
 
     return (
@@ -43,7 +44,7 @@ const UserSection = ({ initialUser }: UserSectionProps) => {
                 size="small"
                 className="hidden sm:flex"
             >
-                Qeydiyyatdan keç
+                Qeydiyyat
             </CsButton>
         </>
     )

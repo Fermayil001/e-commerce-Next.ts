@@ -42,17 +42,17 @@ export default function ContactPage() {
               {
                 icon: BiMapPin,
                 title: "Ünvan",
-                content: "Türkiyə, İstanbul",
+                content: "Azərbaycan, Şəmkir",
               },
               {
                 icon: BiPhone,
                 title: "Telefon",
-                content: "+90 (555) 123-4567",
+                content: "+994 (70) 657 13 13",
               },
               {
                 icon: RiMvAiLine,
                 title: "E-mail",
-                content: "info@lotsia.com",
+                content: "fermayilhsnv57@gmail.com",
               },
             ].map((item, idx) => {
               const Icon = item.icon

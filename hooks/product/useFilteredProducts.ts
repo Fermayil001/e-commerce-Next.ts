@@ -1,3 +1,4 @@
+import { ProductType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 
 interface FilterParams {
@@ -26,7 +27,7 @@ export const useFilteredProducts = (params: FilterParams = {}) => {
 
             if (!res.ok) throw new Error("Failed to fetch products");
 
-            return res.json();
+            return res.json() as Promise<{ products: ProductType[], total: number }>;
         },
         enabled: params.enabled ?? true,
     });

@@ -2,10 +2,14 @@
 import Link from 'next/link'
 import { GiSparkles } from 'react-icons/gi'
 import CsButton from '../ui/CsButton'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useFilteredProducts } from '@/hooks/product/useFilteredProducts';
 
 
 const FeaturedProducts = () => {
+
+    const { data } = useFilteredProducts({ categoryId: '692426e6400e3eeed4f97a9a' })
+    const products = data?.products
+
     return (
         <section className="py-20 px-4 bg-linear-to-br from-slate-50 to-slate-100  mb-16" >
             <div className="container mx-auto max-w-6xl">
@@ -15,15 +19,11 @@ const FeaturedProducts = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {[
-                        { name: "Silk Evening Gown", price: "$1,250" },
-                        { name: "Leather Crossbody", price: "$850" },
-                        { name: "Diamond Pendant", price: "$2,100" },
-                    ].map((item, idx) => (
+                    {products?.map((item, idx) => (
                         <div key={idx} className="group w-full sm:w-[90%]!">
                             <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg cstransition">
                                 <div className="aspect-square bg-linear-to-br from-emerald-100 to-emerald-50 flex items-center justify-center group-hover:from-emerald-200 group-hover:to-emerald-100 transition-colors">
-                                    <GiSparkles className="w-16 h-16 text-emerald-700 opacity-20" />
+                                    <img src={item.images[0]} className="w-full h-full" />
                                 </div>
                                 <div className="p-6">
                                     <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.name}</h3>

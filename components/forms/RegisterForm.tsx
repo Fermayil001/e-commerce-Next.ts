@@ -57,35 +57,36 @@ export default function RegisterForm() {
         <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-slate-50 to-slate-100 px-4">
             <div className="w-full max-w-md p-2 md:p-8">
                 <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold text-slate-900">Join LOTSIA</h1>
-                    <p className="mt-2 text-slate-600">Create your luxury account</p>
+                    <h1 className="text-3xl font-bold text-slate-900"><span className="text-[#e9980d] font-semibold">TRENDORA</span>-ya qoşul</h1>
+                    <p className="mt-2 text-slate-600">Hesabınızı yaradın</p>
                 </div>
 
                 <DynamicForm
                     fields={[
-                        { name: "name", type: "text", placeholder: "Your name" },
-                        { name: "surname", type: "text", placeholder: "Your surname" },
+                        { name: "name", type: "text", placeholder: "Adınız" },
+                        { name: "surname", type: "text", placeholder: "Soyadınız" },
                         { name: "email", type: "email", placeholder: "you@example.com" },
                         { name: "password", type: "password", placeholder: "••••••••" },
                         { name: "confirmPassword", type: "password", placeholder: "••••••••" },
                     ]}
                     fieldLabels={{
-                        name: "Name",
-                        surname: "Surname",
+                        name: "Ad",
+                        surname: "Soyad",
                         email: "Email",
-                        password: "Password",
-                        confirmPassword: "Confirm Password",
+                        password: "Şifrə",
+                        confirmPassword: "Şifrəni təsdiqləyin",
                     }}
                     validationSchema={validationSchema}
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
+                    submitLabel="Qeydiyyatdan keç"
                 />
 
                 <div className="mt-6 text-center text-sm">
                     <p className="text-slate-600">
-                        Already have an account?{" "}
+                        Artıq hesabınız var?{" "}
                         <Link href="/login" className="font-semibold text-slate-900 hover:underline">
-                            Sign in
+                            Daxil ol
                         </Link>
                     </p>
                 </div>

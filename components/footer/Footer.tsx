@@ -9,8 +9,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">LOTOSIA</h3>
-            <p className="text-sm opacity-80">L&T tərəfindən dizayn edilib. Lüks və zərifliyin simvolu.</p>
+            <h3 className="text-xl font-semibold mb-4 text-[#e9980d]">TRENDORA </h3>
+            <p className="text-sm opacity-80">Lüks və zərifliyin simvolu.</p>
           </div>
 
           {/* Quick Links */}
@@ -61,7 +61,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Əlaqə</h4>
             <ul className="space-y-2 text-sm opacity-80">
-              <li>Email: info@lotsia.com</li>
+              <li>Email: info@trendora.com</li>
               <li>Telefon: +90 (555) 123-4567</li>
               <li>Adres: xxx, xxx</li>
               <li className="pt-2 flex gap-3">
@@ -81,8 +81,8 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-center md:text-left">
-          <p className="opacity-80">© {currentYear} LOTSIA. Tüm hakları saklıdır.</p>
-          <p className="opacity-80 text-xs">Designed with elegance by L&T</p>
+          <p className="opacity-80">© {currentYear} TRENDORA. Bütün hüquqlar qorunur.</p>
+          <p className="opacity-80 text-xs">Created by Farmayil</p>
         </div>
       </div>
     </footer>

@@ -14,13 +14,7 @@ const Products = () => {
     const [visibleCount, setVisibleCount] = useState<number>(3)
     const { data: categories } = useGetCategories();
 
-    const { data: productsRes, isLoading } = useFilteredProducts({
-        ...(selectedCat.id === "0" ? {} : { categoryId: selectedCat.id }),
-        enabled: selectedCat.id !== null && selectedCat.id !== undefined
-    });
-
     if (categories === undefined || categories.length === 0) return
-    const products = productsRes?.products
 
     const handleCategoryClick = (category: CategoryType) => {
         setSelectedCat(category)
@@ -43,12 +37,12 @@ const Products = () => {
         <section>
             <Category onCategoryClick={handleCategoryClick} categories={categories} selectedCat={selectedCat} />
             {
-                isLoading ? <LoadingSpinner /> : visibleProducts.map(cat => <ProductsSlider key={cat.id} selectedCat={cat} products={products} />)
+                 visibleProducts.map(cat => <ProductsSlider key={cat.id} selectedCat={cat} />)
             }
 
             <div className="flex justify-end mt-6">
                 {
-                    selectedCat.name === "All" && (
+                    selectedCat.name === "All" && categories.length > 3 && (
                         <CsButton
                             className="gap-2"
                             variant="secondary"

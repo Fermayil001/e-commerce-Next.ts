@@ -22,8 +22,8 @@ const OrderCount = () => {
   const router = useRouter()
   return (
     <NoSsr>
-      <IconButton aria-label="cart" className='p-0! pr-2!' onClick={() => router.push('/cart')}>
-        <StyledBadge badgeContent={items.length} color="success">
+      <IconButton aria-label="cart" className='p-0! pr-2! z-0' onClick={() => router.push('/cart')}>
+        <StyledBadge badgeContent={items.length} color="success" >
           <SlBasket />
         </StyledBadge>
       </IconButton>

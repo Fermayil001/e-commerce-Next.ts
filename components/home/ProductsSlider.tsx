@@ -10,22 +10,35 @@ import { CategoryType } from "@/hooks/categories/useCategories";
 import { ProductType } from "@/types/types";
 import { useCart } from "@/stores/cartStore";
 import { toast } from "react-toastify";
+import { useWishlist } from "@/hooks/product/useWishlist";
+import { useFilteredProducts } from "@/hooks/product/useFilteredProducts";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface ProductsSliderProps {
     selectedCat: CategoryType
-    products: ProductType[]
+    // products: ProductType[]
 }
 
-const ProductsSlider = ({ selectedCat, products }: ProductsSliderProps) => {
+const ProductsSlider = ({ selectedCat, }: ProductsSliderProps) => {
     const prevRef = useRef<HTMLDivElement>(null);
     const nextRef = useRef<HTMLDivElement>(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
     const { addToCart } = useCart()
+    const { toggleWishlist, wishlist } = useWishlist()
+    const { data: products, isLoading } = useFilteredProducts({
+        ...(selectedCat.id === "0" ? {} : { categoryId: selectedCat.id })
+    });
+
+    if (isLoading) return <LoadingSpinner />;
 
     const handleAddToCart = (product: ProductType) => {
         addToCart(product)
         toast.success('Məhsul səbətə əlavə edildi')
+    }
+
+    const handleToggleWishlist = (productId: string) => {
+        toggleWishlist.mutate(productId)
     }
 
     return (
@@ -90,19 +103,23 @@ const ProductsSlider = ({ selectedCat, products }: ProductsSliderProps) => {
                 }}
                 className="mySwiper h-full!"
             >
-                {products?.map(product => (
-                    <SwiperSlide key={product.id} className="flex justify-center">
-                        <Cart
-                            id={product.id.toString()}
-                            image={product.images[0]}
-                            name={product.name}
-                            price={product.price}
-                            rating={product.reviews.map(r => r.rating).reduce((a, b) => a + b, 0) / product.reviews.length || 0}
-                            reviews={product.reviews}
-                            addToCart={() => handleAddToCart(product)}
-                        />
-                    </SwiperSlide>
-                ))}
+                {!products?.products?.length || products?.products?.length < 1
+                    ? "Bu kateqoriyada məhsul yoxdur"
+                    : products?.products?.map(product => (
+                        <SwiperSlide key={product.id} className="flex justify-center">
+                            <Cart
+                                id={product.id.toString()}
+                                image={product.images[0]}
+                                name={product.name}
+                                price={product.price}
+                                rating={product.reviews.map(r => r.rating).reduce((a, b) => a + b, 0) / product.reviews.length || 0}
+                                isFav={Boolean((wishlist as any)?.some((w: any) => w.productId === product.id))}
+                                reviews={product.reviews}
+                                addToCart={() => handleAddToCart(product)}
+                                addToFav={() => handleToggleWishlist(product.id)}
+                            />
+                        </SwiperSlide>
+                    ))}
             </Swiper>
         </div>
     );

@@ -4,10 +4,11 @@ import NavLinks from "./NavLinks"
 import OrderCount from "./OrderCount"
 import { getCurrentUser } from "@/app/actions/getCurrentUser"
 import UserSection from "./UserSection"
+import { User } from "@prisma/client"
 
 const Navbar = async () => {
 
-  const currentUser = await getCurrentUser()
+  const currentUser: User | null = await getCurrentUser()
 
   return (
     <div className="flex items-center justify-between py-4 px-3 md:px-10 gap-2 md:gap-4 bg-cswhite text-cswhite border-b border-csborder">
@@ -17,7 +18,7 @@ const Navbar = async () => {
       {/* <Favorites /> */}
       <div className="flex gap-2 md:4 items-center">
         <UserSection initialUser={currentUser} />
-      {/*   {
+        {/*   {
           currentUser
             ? <User />
             : (

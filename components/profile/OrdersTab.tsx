@@ -13,16 +13,16 @@ const OrdersTab = () => {
             <div className="flex flex-col gap-6 rounded-xl csborder py-6">
                 <div className="flex items-center justify-between gap-2 px-6">
                     <div className="leading-none font-semibold">
-                        Order History
+                        Sifariş Tarixçəsi
                     </div>
                     <div className="text-csgray text-sm">
-                        Track and manage your orders
+                        Sifarişlərinizi izləyin və idarə edin
                     </div>
                 </div>
                 <div className="px-6 space-y-4">
                     {orders.length === 0 ? (
                         <div className="text-center text-csgray">
-                            No orders found.
+                            Sifariş tapılmadı.
                         </div>
                     ) : (
                         orders.map((order: any) => (

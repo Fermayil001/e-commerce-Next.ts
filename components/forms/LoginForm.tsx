@@ -28,7 +28,7 @@ export default function LoginForm() {
     const handleSubmit = async (values: LoginFormValues) => {
         try {
             await mutateAsync(values)
-            router.push("/profile")
+            router.push("/")
             router.refresh()
         } catch (error) {
             toast.error(error instanceof Error ? error.message : "An unexpected error occurred")
@@ -39,8 +39,8 @@ export default function LoginForm() {
         <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-slate-50 to-slate-100">
             <div className="w-full max-w-md p-2 md:p-8">
                 <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold text-slate-900">Welcome Back</h1>
-                    <p className="mt-2 text-slate-600">Sign in to your LOTSIA account</p>
+                    <h1 className="text-3xl font-bold text-slate-900">Yenidən xoş gəlmisən</h1>
+                    <p className="mt-2 text-slate-600"><span className="font-semibold text-[#e9980d]">TRENDORA</span> hesabınıza daxil olun</p>
                 </div>
                 <DynamicForm
                     fields={[
@@ -65,9 +65,9 @@ export default function LoginForm() {
                 />
                 <div className="mt-6 text-center text-sm">
                     <p className="text-slate-600">
-                        Don't have an account?{" "}
+                        Hesabınız yoxdur?{" "}
                         <Link href="/register" className="font-semibold text-slate-900 hover:underline">
-                            Create one
+                            Yarat
                         </Link>
                     </p>
                 </div>

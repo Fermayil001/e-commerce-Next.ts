@@ -21,3 +21,17 @@ export async function GET(
 
     return NextResponse.json(product);
 }
+
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: { id: string } }
+) {
+    const { id } = params;
+
+    try {
+        await prisma.product.delete({ where: { id } });
+        return NextResponse.json({ message: "Product deleted" });
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
+    }
+}

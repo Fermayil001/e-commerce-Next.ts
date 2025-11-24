@@ -1,5 +1,4 @@
 import NextAuth, { AuthOptions } from "next-auth"
-import GithubProvider from "next-auth/providers/github"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { prisma } from "../../../libs/prismadb"
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -9,10 +8,6 @@ import bcrypt from "bcrypt"
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID as string,
-            clientSecret: process.env.GITHUB_SECRET as string,
-        }),
         CredentialsProvider({
             name: "credentials",
             credentials: {
@@ -33,6 +28,8 @@ export const authOptions: AuthOptions = {
                 const compare = await bcrypt.compare(credentials.password, user.hashedPassword)
                 if (!compare) throw new Error("Şifrə yanlışdır")
 
+                // if (user.role !== "ADMIN") throw new Error("Siz admin deyilsiniz");
+
                 return user
             }
         }),
@@ -45,6 +42,18 @@ export const authOptions: AuthOptions = {
         strategy: 'jwt'
     },
     secret: process.env.NEXTAUTH_SECRET,
+
+/*     callbacks: {
+        async jwt({ token, user }) {
+            if (user) token.role = user.role;
+            return token;
+        },
+        async session({ session, token }) {
+            session?.user?.role = token.role;
+            return session;
+        },
+    } */
+
 }
 
 
