@@ -23,7 +23,7 @@ const HamburgerMenu = () => {
                         <Link
                             onClick={() => setIsOpen(prev => !prev)}
                             href={item.href}
-                            className="text-sm font-medium text-slate-600 hover:text-slate-900"
+                            className="text-sm font-medium w-full  text-slate-600 hover:text-slate-900"
                         >
                             {item.text}
                         </Link>

@@ -62,6 +62,7 @@ export default function LoginForm() {
                     validationSchema={validationSchema}
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
+                    submitLabel="Daxil ol"
                 />
                 <div className="mt-6 text-center text-sm">
                     <p className="text-slate-600">
