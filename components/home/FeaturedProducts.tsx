@@ -7,7 +7,7 @@ import { useFilteredProducts } from '@/hooks/product/useFilteredProducts';
 
 const FeaturedProducts = () => {
 
-    const { data } = useFilteredProducts({ categoryId: '692426e6400e3eeed4f97a9a' })
+    const { data } = useFilteredProducts({ categoryId: '69cfdf1ad56106a9c85e18af' })
     const products = data?.products
 
     return (

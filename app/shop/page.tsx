@@ -16,7 +16,7 @@ import { useWishlist } from "@/hooks/product/useWishlist"
 
 export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState<CategoryType>({ id: '0', name: 'All' })
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500])
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 15000])
     const { data: categories } = useGetCategories();
     const { data: productsRes, isLoading } = useFilteredProducts({
         categoryId: selectedCategory.id === '0' ? undefined : selectedCategory.id,
