@@ -30,5 +30,6 @@ export const useFilteredProducts = (params: FilterParams = {}) => {
             return res.json() as Promise<{ products: ProductType[], total: number }>;
         },
         enabled: params.enabled ?? true,
+        retry: false,
     });
 };
